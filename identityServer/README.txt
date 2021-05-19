@@ -1,4 +1,11 @@
 ﻿macOS:
+1. add .dockerignore file and add
+    /obj
+    /bin
+2. add Dockerfile and add required content in there
+
+3. Inside api folder run : docker build -t myidentityserver_api . 
+
 1. remove all https dev-certs by running the below command:
     dotnet dev-certs https --clean
     
