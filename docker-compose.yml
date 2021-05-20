@@ -1,15 +1,15 @@
 version: '3.4'
 
 services:
-  identityserver:
-    image: ${DOCKER_REGISTRY-}identityserver
-    build:
-      context: .
-      dockerfile: identityServer/Dockerfile
-
   api:
     image: ${DOCKER_REGISTRY-}api
     build:
       context: .
       dockerfile: api/Dockerfile
+
+  identityserver:
+    image: ${DOCKER_REGISTRY-}identityserver
+    build:
+      context: .
+      dockerfile: identityServer/Dockerfile
 

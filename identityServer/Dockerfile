@@ -7,9 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
-COPY identityServer.csproj identityServer/
+COPY identityServer/identityServer.csproj identityServer/
 RUN dotnet restore "identityServer/identityServer.csproj"
-COPY . identityServer/
+COPY . .
 WORKDIR "/src/identityServer"
 RUN dotnet build "identityServer.csproj" -c Release -o /app/build
 
