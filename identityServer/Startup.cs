@@ -29,6 +29,13 @@ namespace identityServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(opt => opt.UseInMemoryDatabase("database_name"));
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                });
+            });
             services.AddControllers();
             services.AddTransient<IAuthRepository, AuthRepository>();
             //services.AddIdentityServer()
@@ -40,6 +47,7 @@ namespace identityServer
             var builder = services.AddIdentityServer(options =>
                                     {
                                         options.EmitStaticAudienceClaim = false;
+                                        options.IssuerUri = "something";
                                     })
                                     .AddDeveloperSigningCredential()
                                     .AddInMemoryIdentityResources(ResourceManager.Ids)
@@ -57,9 +65,10 @@ namespace identityServer
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors();
             app.UseIdentityServer();
             app.UseAuthorization();
 
